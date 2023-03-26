@@ -4,7 +4,7 @@ from typing import Protocol, runtime_checkable
 
 @runtime_checkable
 class CanTalk(Protocol):
-    def talk():
+    def talk(self):
         ...
 
 

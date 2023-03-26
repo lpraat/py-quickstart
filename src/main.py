@@ -4,7 +4,7 @@ from typing import Protocol, runtime_checkable
 
 @runtime_checkable
 class CanTalk(Protocol):
-    def talk(self):
+    def talk(self) -> None:
         ...
 
 
@@ -12,5 +12,5 @@ class CanTalk(Protocol):
 class Human:
     name: str
 
-    def talk(self):
+    def talk(self) -> None:
         print(f"My name is {self.name}")

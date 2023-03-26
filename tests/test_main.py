@@ -1,6 +1,6 @@
-from src.main import Human, CanTalk
+from src.main import CanTalk, Human
 
 
-def test_human():
-    h: CanTalk = Human("Lorenzo")
+def test_human() -> None:
+    h: int = Human("Lorenzo")
     assert isinstance(h, CanTalk)

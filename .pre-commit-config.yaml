@@ -10,18 +10,23 @@ repos:
     - id: trailing-whitespace
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: 'v1.3.0'
+  rev: 'v1.5.1'
   hooks:
     - id: mypy
       args: []
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: "v0.0.270"
+  rev: "v0.0.291"
   hooks:
     - id: ruff
       args: [--fix, --exit-non-zero-on-fix]
 
 - repo: https://github.com/psf/black
-  rev: 23.3.0
+  rev: 23.9.1
   hooks:
     - id: black
+
+# - repo: https://github.com/pycqa/pydocstyle
+#   rev: 6.3.0
+#   hooks:
+#   -   id: pydocstyle

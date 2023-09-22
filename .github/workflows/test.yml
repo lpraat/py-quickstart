@@ -1,4 +1,4 @@
-name: deploy
+name: Tests
 
 on:
   push:
@@ -18,24 +18,25 @@ jobs:
       - name: Check out
         uses: actions/checkout@v3
 
-      - name: Install poetry
-        run: pipx install poetry
-
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@main
         with:
           python-version: ${{ matrix.python-version }}
           # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md#caching-packages
-          cache: 'poetry'
+          cache: 'pip'
+          cache-dependency-path: pyproject.toml
 
-      - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+      - name: Install build packages
+        run: pip install --upgrade pip build wheel setuptools
 
-      - name: Install dependencies
-        run: poetry install --no-root
+      - name: Install editable package
+        run: pip install -e ".[dev]"
 
-      - name: Run Pre-commit
-        run: poetry run pre-commit run --show-diff-on-failure --color=always --all-files
+      - name: Run Mypy
+        run: mypy pkg_name tests
+
+      - name: Run Ruff
+        run: ruff pkg_name tests
 
       - name: Run tests
-        run: poetry run pytest
+        run: python -m pytest -v
